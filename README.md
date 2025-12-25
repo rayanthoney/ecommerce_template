@@ -33,7 +33,7 @@
 <!-- link to project -->
     <a href='-URL TO DEMO GOES HERE-'>
     <!-- link to local image -->
-        <img src="public\placeholder.png" alt="Store Image" height=""/>
+        <img src="public/ecomm-template.png" alt="Store Image" height=""/>
     </a>
 </div>
 
