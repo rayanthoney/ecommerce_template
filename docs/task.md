@@ -20,7 +20,7 @@
     - [x] Create post-login hook to merge guest cart with user cart <!-- id: 16 -->
 
 - [ ] **Phase 4: UI Construction** <!-- id: 17 -->
-    - [/] Set up global layout and generic UI components (Buttons, Inputs) <!-- id: 18 -->
+    - [x] Set up global layout and generic UI components (Buttons, Inputs) <!-- id: 18 -->
     - [x] Build Product Listing Page (PLP) with URL state management <!-- id: 19 -->
     - [x] Implement Product Card component with responsive design <!-- id: 20 -->
     - [/] Add Suspense boundaries and Skeleton loaders <!-- id: 21 -->
