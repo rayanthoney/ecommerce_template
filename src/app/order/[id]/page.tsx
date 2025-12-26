@@ -6,13 +6,13 @@ import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default async function OrderPage({ params }: { params: { id: string } }) {
-    // Await params if Next.js version requires it (15 might), though typically sync in args in recent versions? 
-    // Wait, params is promise in new Next/Canary but we are using 15.
-    // Let's assume params is available.
-    // Wait, params in generated code usually needs await in async components in 15? 
-    // Let's safe bet.
-    const { id } = await (params as any); // Type assertion for safety if types mismatch
+interface ShippingDetails {
+    name: string;
+    // Add other fields if needed for future
+}
+
+export default async function OrderPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     // Parse int ID
     const orderId = parseInt(id);
@@ -36,6 +36,8 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
     if (!order) notFound();
 
+    const shipping = order.shippingDetails as unknown as ShippingDetails;
+
     return (
         <div className="container mx-auto py-16 px-4 flex flex-col items-center max-w-2xl text-center">
             <div className="h-20 w-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-6">
@@ -44,7 +46,7 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
             <h1 className="text-3xl font-bold mb-2">Order Confirmed!</h1>
             <p className="text-muted-foreground mb-8">
-                Thank you, {order.shippingDetails ? (order.shippingDetails as any).name : 'Guest'}.
+                Thank you, {shipping?.name || 'Guest'}.
                 Your order #{order.id} has been placed.
             </p>
 

@@ -26,7 +26,7 @@ export async function addToCart(formData: FormData) {
     }
 
     // 2. Resolve Cart ID (User or Guest)
-    let cart = await getCartId();
+    const cart = await getCartId();
     let cartId = cart?.id;
 
     // 3. Ensure Cart Exists

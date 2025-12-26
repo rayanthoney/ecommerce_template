@@ -54,7 +54,7 @@ export function CartLineItem({ item }: CartItemProps) {
                         Qty: {item.quantity}
                     </p>
                     <div className="sm:hidden mt-2 font-medium">
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total)}
+                        {formatCurrency(total)}
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ export function CartLineItem({ item }: CartItemProps) {
                 </div>
 
                 <div className="hidden sm:block font-medium w-24 text-right">
-                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total)}
+                    {formatCurrency(total)}
                 </div>
 
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={handleRemove} disabled={isPending}>

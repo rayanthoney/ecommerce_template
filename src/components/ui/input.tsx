@@ -1,8 +1,8 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-export interface InputProps
-    extends React.InputHTMLAttributes<HTMLInputElement> { }
+// Using proper type to avoid empty interface lint error
+type InputProps = React.ComponentProps<"input">;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type, ...props }, ref) => {

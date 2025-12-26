@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { db } from "@/db";
-import { carts, cartItems, orders, orderItems, productVariants } from "@/db/schema";
+import { carts, cartItems, orders, orderItems } from "@/db/schema";
 import { getCartId } from "@/lib/cart";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -73,7 +73,6 @@ export async function placeOrder(formData: FormData) {
     }
 
     // 4. Transaction: Create Order, Items, Clear Cart
-    let newOrderId;
 
     // A. Create Order
     const [insertedOrder] = await db.insert(orders).values({
@@ -85,7 +84,7 @@ export async function placeOrder(formData: FormData) {
         shippingDetails: shippingDetails,
     }).returning();
 
-    newOrderId = insertedOrder.id;
+    const newOrderId = insertedOrder.id;
 
     // B. Create Order Items
     for (const itemData of orderItemsData) {

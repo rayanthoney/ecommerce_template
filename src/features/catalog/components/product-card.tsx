@@ -26,7 +26,7 @@ export function ProductCard({ id, name, description, basePrice }: ProductCardPro
                 </p>
                 <div className="flex items-center justify-between pt-2">
                     <span className="font-bold text-lg">
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(basePrice))}
+                        {formatCurrency(basePrice)}
                     </span>
                     <div className="flex gap-2">
                         <AddToCartButton productId={id} />
