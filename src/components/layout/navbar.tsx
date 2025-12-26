@@ -2,9 +2,10 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Menu } from "lucide-react";
 import { UserMenu } from "@/features/auth/components/user-menu";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 export async function Navbar() {
     const session = await auth.api.getSession({
@@ -14,6 +15,32 @@ export async function Navbar() {
     return (
         <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
+                {/* Mobile Menu */}
+                <div className="md:hidden mr-2">
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                                <Menu className="h-5 w-5" />
+                                <span className="sr-only">Menu</span>
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent side="left">
+                            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                            <div className="flex flex-col gap-4 mt-8">
+                                <Link href="/" className="text-lg font-medium hover:text-primary">
+                                    Home
+                                </Link>
+                                <Link href="#products" className="text-lg font-medium hover:text-primary">
+                                    Products
+                                </Link>
+                                <Link href="/about" className="text-lg font-medium hover:text-primary">
+                                    About
+                                </Link>
+                            </div>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+
                 {/* Logo */}
                 <Link href="/#hero" className="flex items-center space-x-2 mr-6">
                     <span className="text-xl font-bold tracking-tight">LOGO</span>

@@ -5,6 +5,7 @@ import { signIn } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export function SignInForm() {
     const [loading, setLoading] = useState(false);
@@ -19,16 +20,20 @@ export function SignInForm() {
         const formData = new FormData(e.currentTarget);
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
+        const form = e.currentTarget;
 
         await signIn.email({
             email,
             password,
         }, {
             onSuccess: () => {
+                toast.success("Signed in successfully");
+                form.reset();
                 router.push("/");
                 router.refresh();
             },
             onError: (ctx) => {
+                toast.error(ctx.error.message);
                 setError(ctx.error.message);
                 setLoading(false);
             },
@@ -36,7 +41,7 @@ export function SignInForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm">
+        <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm" autoComplete="off">
             {error && (
                 <div className="bg-destructive/15 text-destructive p-3 rounded-md text-sm font-medium">
                     {error}
@@ -50,6 +55,7 @@ export function SignInForm() {
                     id="email"
                     type="email"
                     required
+                    autoComplete="username"
                     className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                 />
             </div>
@@ -61,6 +67,7 @@ export function SignInForm() {
                     id="password"
                     type="password"
                     required
+                    autoComplete="current-password"
                     className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                 />
             </div>
