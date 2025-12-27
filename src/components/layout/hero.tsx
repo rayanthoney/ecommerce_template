@@ -17,7 +17,7 @@ export function Hero() {
             <div className="container px-4 md:px-6 relative">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
-                        New Collection 2025
+                        New Collection 2026
                     </div>
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
                         Elevate Your Lifestyle
