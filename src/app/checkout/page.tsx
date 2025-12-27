@@ -1,6 +1,5 @@
 import { getCart } from "@/features/cart/data/get-cart";
 import { CheckoutForm } from "@/features/checkout/components/checkout-form";
-import { CartSummary } from "@/features/cart/components/cart-summary";
 import { redirect } from "next/navigation";
 
 export default async function CheckoutPage() {

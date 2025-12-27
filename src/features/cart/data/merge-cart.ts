@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { carts, cartItems } from "@/db/schema";
-import { eq, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function mergeGuestCartIntoUser(userId: string, guestId: string) {
     if (!userId || !guestId) return;

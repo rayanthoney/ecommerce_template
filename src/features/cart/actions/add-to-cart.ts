@@ -27,7 +27,6 @@ export async function addToCart(formData: FormData) {
 
     // 2. Resolve Cart ID (User or Guest)
     const cart = await getCartId();
-    let cartId = cart?.id;
 
     // 3. Ensure Cart Exists
     if (!cart) {
@@ -44,10 +43,10 @@ export async function addToCart(formData: FormData) {
         }
 
         // Create the cart in DB
-        const newCart = await db.insert(carts).values({
+        await db.insert(carts).values({
             guestId: guestId,
         }).returning();
-        cartId = newCart[0].id.toString(); // schema has id as serial (number) but getCartId returns string. Wait, schema has id as number.
+        // cartId assignment removed as it was unused
         // Correction: carts.id is serial (number). getCartId returns { id: string } because user.id is string (better-auth).
         // We need to handle the type mismatch.carts.id is number.
     }
